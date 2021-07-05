@@ -14,7 +14,7 @@ int main()
 
 			const auto client_entities = il2cpp.read<std::uintptr_t>(base_networkable->get().get_static_field("clientEntities"));
 
-			std::printf("[il2cpp-external] client_entities => %p\n", client_entities);
+			std::printf("[il2cpp-external] client_entities => 0x%p\n", client_entities);
 		}
 	}
 
