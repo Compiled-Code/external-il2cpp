@@ -7,22 +7,22 @@ std::uintptr_t il2cpp::types::il2cpp_class_t::get_instance() const
 	return instance;
 }
 
-std::optional<std::uint32_t> il2cpp::types::il2cpp_class_t::get_field_key(const std::string& field_name) const
+std::int32_t il2cpp::types::il2cpp_class_t::get_field_key(const std::string& field_name) const
 {
 	for (auto current_field = fields_table; current_field < fields_table + (fields_size * 0x20); current_field += 0x20)
 	{
 		const auto current_field_name = il2cpp.read_string(il2cpp.read<std::uintptr_t>(current_field));
 
 		if (current_field_name == field_name)
-			return il2cpp.read<std::uint32_t>(current_field + 0x18);
+			return il2cpp.read<std::int32_t>(current_field + 0x18);
 	}
 
-	return std::nullopt;
+	return -1;
 }
 
 std::uintptr_t il2cpp::types::il2cpp_class_t::get_static_field(const std::string& field_name) const
 {
-	if (const auto current_field_key = get_field_key(field_name))
+	if (const auto current_field_key = get_field_key(field_name); current_field_key != -1)
 	{
 		const auto current_field_value = static_fields_table + current_field_key.value();
 
@@ -34,7 +34,7 @@ std::uintptr_t il2cpp::types::il2cpp_class_t::get_static_field(const std::string
 
 std::uintptr_t il2cpp::types::il2cpp_class_t::get_field(const std::string& field_name) const
 {
-	if (const auto current_field_key = get_field_key(field_name); current_field_key.has_value())
+	if (const auto current_field_key = get_field_key(field_name); current_field_key != -1)
 	{
 		const auto current_field_value = instance + current_field_key.value();
 
