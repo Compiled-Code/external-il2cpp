@@ -4,11 +4,11 @@ int main()
 {
 	auto il2cpp = il2cpp::types::il2cpp_t{ "Rust" };
 
-	if (const auto assembly_csharp = il2cpp.get_image("Assembly-CSharp"); assembly_csharp.has_value())
+	if (const auto assembly_csharp = il2cpp.get_image("Assembly-CSharp"))
 	{
 		std::printf("[il2cpp-external] assembly_csharp => 0x%p\n", assembly_csharp->get().get_instance());
 
-		if (const auto base_networkable = assembly_csharp->get().get_class("BaseNetworkable"); base_networkable.has_value())
+		if (const auto base_networkable = assembly_csharp->get().get_class("BaseNetworkable"))
 		{
 			std::printf("[il2cpp-external] base_networkable => 0x%p\n", base_networkable->get().get_instance());
 
